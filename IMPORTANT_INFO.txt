@@ -1,0 +1,52 @@
+——————————————————————————
+“M87_sources_celestial_coord.reg” is a region file/list of all sources in M87, and is required to run the code modules for M87.
+
+For other galaxies, a similar source list will need to be made and used in place of the M87 source list when running the code.
+——————————————————————————
+
+——————————————————————————
+(brief) MODULE DESCRIPTIONS:
+
+- User Input: Asks where to take files from, and where to put any new files it creates.
+
+- Source Detection: Applies an existing list of sources (from every observation of M87) to the
+input files; converting each source’s celestial coordinates (RA/DEC) to pixel coordinates (X/Y)
+on the input image. If using this code for other galaxies, a list of sources will need to be made for each individual galaxy.
+
+- Variability: Uses some algorithms (provided by CIAO) to determine how much each source
+varies over time, and plots the source's light curve. Also gives each source a
+“score” ranging from 0 to 10, with higher scores corresponding to sources that are more likely to
+be variable.
+
+- Spectral Analysis: Compares the number of photons received from each source at different
+wavelengths (plots spectra).
+
+- Visualization: Intended to be used separately after running data through other modules; asks for the location of data for one (already processed) observation and plots everything from the variability and spectral analysis modules.
+——————————————————————————
+
+——————————————————————————
+INPUT/OUTPUT FOLDERS:
+
+- The code is designed to handle data from input folders formatted like those downloaded from the Chandra Data Archive (https://cxc.cfa.harvard.edu/cda/), and will break otherwise.
+
+- All outputs from the code will be put in the folder named "(name of folder at inputDataFolderPath) + "OUTPUT" ".
+——————————————————————————
+
+——————————————————————————
+IMPORTANT FILES:
+
+- .reg files:
+Region files that highlight source(s) in an event file; “sources.reg” contain ALL sources for
+an observation, while “source_id_[#]_index_[#].reg” is only a single source (id is the order that
+the files were processed and has no physical meaning, but index refers to the variability index
+(more info in the variability module documentation))
+
+- copy_evt2.fits:
+Duplicate of the input event file, used for the visualization module. You can use this event file with any .reg files in js9/ds9 to highlight sources manually.
+
+- lc_prob files:
+Probability-weighted light curve associated with a specific source/region file.
+
+- specextract files:
+Four files (.rmf, .pi, .arf, corr.arf) for the spectra of a source.
+——————————————————————————
